@@ -1,0 +1,47 @@
+{
+  "name": "moar-profile-viewer",
+  "version": "0.0.1",
+  "description": "converts cpuprofile files to call graphs",
+  "license": "MIT",
+  "author": "Patrick Mueller <pmuellr@apache.org> (https://github.com/pmuellr)",
+  "homepage": "https://github.com/pmuellr/moar-profile-viewer",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pmuellr/moar-profile-viewer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pmuellr/moar-profile-viewer/issues"
+  },
+  "scripts": {
+    "build": "node tools/build",
+    "sample": "cd test/fixtures && ../../moar-profile-viewer.js express-jade.cpuprofile",
+    "standard": "echo 'running standard' && standard -v",
+    "testU": "npm -s run utest",
+    "test": "npm -s run utest && npm -s run standard",
+    "utest": "node test/index.js | FORCE_COLOR=1 tap-spec",
+    "watch": "nodemon --exec 'node tools/watch-task'"
+  },
+  "standard": {
+    "ignore": [
+      "/tmp/",
+      "/docs/"
+    ]
+  },
+  "dependencies": {
+    "jquery": "~3.2.1"
+  },
+  "devDependencies": {
+    "browserify": "~14.4.0",
+    "cat-source-map": "~0.1.2",
+    "chalk": "~2.1.0",
+    "less": "~2.7.2",
+    "nodemon": "~1.11.1",
+    "shelljs": "~0.7.8",
+    "st": "~1.2.0",
+    "standard": "~10.0.3",
+    "tap-spec": "~4.1.1",
+    "tape": "~4.8.0",
+    "viz.js": "~1.8.0",
+    "yield-callback": "~1.0.0"
+  }
+}

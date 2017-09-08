@@ -1,0 +1,246 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-size: 100%;
+  font-family: sans-serif;
+  background-color: #F7F7FF;
+}
+.scroll {
+  overflow: scroll;
+}
+#main {
+  display: grid;
+  height: 100%;
+  width: 100%;
+}
+#header {
+  grid-area: header;
+  padding: 0.5em;
+  background-color: #000;
+  color: #AAA;
+}
+#header a {
+  color: #AAF;
+}
+#footer {
+  grid-area: footer;
+  padding: 0.5em;
+  background-color: #000;
+  color: #AAA;
+}
+#toolbar-t {
+  grid-area: toolbar-t;
+  padding: 0.5em;
+  background-color: #dedeff;
+  border-top: 2px solid #AAA;
+  border-bottom: thin solid #dddddd;
+}
+#content-t {
+  grid-area: content-t;
+  padding: 0.5em;
+  overflow: scroll;
+}
+#toolbar-l {
+  grid-area: toolbar-l;
+  padding: 0.5em;
+  background-color: #dedeff;
+  border-right: 2px solid #AAA;
+  border-bottom: thin solid #dddddd;
+}
+#content-l {
+  grid-area: content-l;
+  padding: 0.5em;
+  overflow: scroll;
+  border-right: 2px solid #AAA;
+}
+#toolbar-r {
+  grid-area: toolbar-r;
+  padding: 0.5em;
+  background-color: #dedeff;
+  border-bottom: thin solid #dddddd;
+}
+#content-r {
+  grid-area: content-r;
+  padding: 0.5em;
+  overflow: scroll;
+}
+#main.zoom-out {
+  grid-template-rows: auto auto 1fr auto 1fr;
+  grid-template-columns: 50% 50%;
+  grid-template-areas: "header    header" "toolbar-t toolbar-t" "content-t content-t" "toolbar-l toolbar-r" "content-l content-r";
+}
+#main.zoom-t {
+  grid-template-rows: auto auto 1fr;
+  grid-template-columns: 100%;
+  grid-template-areas: "header" "toolbar-t" "content-t";
+}
+#main.zoom-l {
+  grid-template-rows: auto auto 1fr;
+  grid-template-columns: 100%;
+  grid-template-areas: "header" "toolbar-l" "content-l";
+}
+#main.zoom-r {
+  grid-template-rows: auto auto 1fr;
+  grid-template-columns: 100%;
+  grid-template-areas: "header" "toolbar-r" "content-r";
+}
+#main.zoom-t #toolbar-l {
+  display: none;
+}
+#main.zoom-t #content-l {
+  display: none;
+}
+#main.zoom-t #toolbar-r {
+  display: none;
+}
+#main.zoom-t #content-r {
+  display: none;
+}
+#main.zoom-l #toolbar-t {
+  display: none;
+}
+#main.zoom-l #content-t {
+  display: none;
+}
+#main.zoom-l #toolbar-r {
+  display: none;
+}
+#main.zoom-l #content-r {
+  display: none;
+}
+#main.zoom-r #toolbar-t {
+  display: none;
+}
+#main.zoom-r #content-t {
+  display: none;
+}
+#main.zoom-r #toolbar-l {
+  display: none;
+}
+#main.zoom-r #content-l {
+  display: none;
+}
+.zoom-button {
+  display: inline-block;
+  height: 16px;
+  width: 16px;
+  background-size: contain;
+  margin-right: 0.5em;
+}
+#main.zoom-out .zoom-button {
+  background-image: url('images/open-iconic/zoom-in-8x.png');
+}
+#main.zoom-t .zoom-button {
+  background-image: url('images/open-iconic/zoom-out-8x.png');
+}
+#main.zoom-l .zoom-button {
+  background-image: url('images/open-iconic/zoom-out-8x.png');
+}
+#main.zoom-r .zoom-button {
+  background-image: url('images/open-iconic/zoom-out-8x.png');
+}
+#main.zoom-out .zoom-button:hover {
+  cursor: zoom-in;
+}
+#main.zoom-t .zoom-button:hover {
+  cursor: zoom-out;
+}
+#main.zoom-l .zoom-button:hover {
+  cursor: zoom-out;
+}
+#main.zoom-r .zoom-button:hover {
+  cursor: zoom-out;
+}
+#initial-content-t {
+  font-size: 48pt;
+  font-weight: bold;
+  color: #CCC;
+}
+#logo-image {
+  float: right;
+  height: 32px;
+  background-image: url('images/moar.png');
+}
+.float-left {
+  float: left;
+}
+.float-right {
+  float: right;
+}
+.align-left {
+  text-align: left;
+}
+.align-right {
+  text-align: right;
+}
+.clickable:hover {
+  cursor: pointer;
+}
+.bordered {
+  border: thin solid #AAA;
+  border-radius: 0.5em;
+  padding: 0.25em 0.5em;
+}
+table.show-user tr.isSystem {
+  display: none;
+}
+table.full-width {
+  width: 100%;
+}
+td {
+  padding: 0.1em 0.5em;
+}
+tr:nth-child(even) {
+  background-color: #EEE;
+}
+thead td {
+  font-weight: bold;
+}
+table tr.selected {
+  background-color: #DDF;
+}
+.source-lines {
+  font-size: 10pt;
+  font-family: monospace;
+  white-space: pre;
+}
+.source-line {
+  color: black;
+}
+.source-lineno {
+  color: blue;
+  padding-right: 2em;
+}
+.source-annotation {
+  margin: 0.5em 0 0.7em 0;
+}
+.source-linehit,
+.source-function {
+  border-radius: 0.5em;
+  margin: 0.5em 0;
+  padding: 0.2em 0.5em;
+}
+.source-linehit {
+  border: thin solid #D77;
+  color: #D77;
+}
+.source-function {
+  border: thin solid #77D;
+  color: #77D;
+}
+.source-line-linehit {
+  background-color: #FFE7E7;
+}
+.source-line-function {
+  background-color: #E7E7FF;
+}

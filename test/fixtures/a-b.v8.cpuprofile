@@ -1,0 +1,224 @@
+{
+  "typeId": "CPU",
+  "uid": "1",
+  "title": "undefined",
+  "head": {
+    "functionName": "(root)",
+    "url": "",
+    "lineNumber": 0,
+    "callUID": 15,
+    "bailoutReason": "",
+    "id": 1,
+    "scriptId": 0,
+    "hitCount": 0,
+    "children": [
+      {
+        "functionName": "listOnTimeout",
+        "url": "timers.js",
+        "lineNumber": 162,
+        "callUID": 11,
+        "bailoutReason": "no reason",
+        "id": 2,
+        "scriptId": 40,
+        "hitCount": 0,
+        "children": [
+          {
+            "functionName": "tryOnTimeout",
+            "url": "timers.js",
+            "lineNumber": 246,
+            "callUID": 10,
+            "bailoutReason": "TryFinallyStatement",
+            "id": 3,
+            "scriptId": 40,
+            "hitCount": 0,
+            "children": [
+              {
+                "functionName": "ontimeout",
+                "url": "timers.js",
+                "lineNumber": 382,
+                "callUID": 9,
+                "bailoutReason": "no reason",
+                "id": 4,
+                "scriptId": 40,
+                "hitCount": 0,
+                "children": [
+                  {
+                    "functionName": "run",
+                    "url": "/Users/pmuellr/Projects/moar-profile-viewer/test/fixtures/a-b.js",
+                    "lineNumber": 7,
+                    "callUID": 8,
+                    "bailoutReason": "no reason",
+                    "id": 5,
+                    "scriptId": 77,
+                    "hitCount": 0,
+                    "children": [
+                      {
+                        "functionName": "a",
+                        "url": "/Users/pmuellr/Projects/moar-profile-viewer/test/fixtures/a-b.js",
+                        "lineNumber": 11,
+                        "callUID": 7,
+                        "bailoutReason": "no reason",
+                        "id": 6,
+                        "scriptId": 77,
+                        "hitCount": 0,
+                        "children": [
+                          {
+                            "functionName": "b",
+                            "url": "/Users/pmuellr/Projects/moar-profile-viewer/test/fixtures/a-b.js",
+                            "lineNumber": 18,
+                            "callUID": 6,
+                            "bailoutReason": "no reason",
+                            "id": 7,
+                            "scriptId": 77,
+                            "hitCount": 0,
+                            "children": [
+                              {
+                                "functionName": "wait",
+                                "url": "/Users/pmuellr/Projects/moar-profile-viewer/test/fixtures/a-b.js",
+                                "lineNumber": 23,
+                                "callUID": 4,
+                                "bailoutReason": "no reason",
+                                "id": 8,
+                                "scriptId": 77,
+                                "hitCount": 583,
+                                "children": [
+                                  {
+                                    "functionName": "start",
+                                    "url": "nsolid.js",
+                                    "lineNumber": 645,
+                                    "callUID": 3,
+                                    "bailoutReason": "TryCatchStatement",
+                                    "id": 9,
+                                    "scriptId": 67,
+                                    "hitCount": 0,
+                                    "children": [
+                                      {
+                                        "functionName": "startProfiling",
+                                        "url": "profiler.js",
+                                        "lineNumber": 192,
+                                        "callUID": 2,
+                                        "bailoutReason": "no reason",
+                                        "id": 10,
+                                        "scriptId": 75,
+                                        "hitCount": 0,
+                                        "children": [
+                                          {
+                                            "functionName": "setSamplingInterval",
+                                            "url": "",
+                                            "lineNumber": 0,
+                                            "callUID": 1,
+                                            "bailoutReason": "",
+                                            "id": 11,
+                                            "scriptId": 0,
+                                            "hitCount": 0,
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ],
+                                "lineTicks": [
+                                  {
+                                    "line": 24,
+                                    "hitCount": 2
+                                  },
+                                  {
+                                    "line": 25,
+                                    "hitCount": 581
+                                  }
+                                ]
+                              },
+                              {
+                                "functionName": "now",
+                                "url": "now",
+                                "lineNumber": 0,
+                                "callUID": 5,
+                                "bailoutReason": "",
+                                "id": 14,
+                                "scriptId": 0,
+                                "hitCount": 3,
+                                "children": []
+                              }
+                            ]
+                          },
+                          {
+                            "functionName": "wait",
+                            "url": "/Users/pmuellr/Projects/moar-profile-viewer/test/fixtures/a-b.js",
+                            "lineNumber": 23,
+                            "callUID": 4,
+                            "bailoutReason": "no reason",
+                            "id": 15,
+                            "scriptId": 77,
+                            "hitCount": 1077,
+                            "children": [],
+                            "lineTicks": [
+                              {
+                                "line": 24,
+                                "hitCount": 2
+                              },
+                              {
+                                "line": 25,
+                                "hitCount": 1075
+                              }
+                            ]
+                          },
+                          {
+                            "functionName": "now",
+                            "url": "now",
+                            "lineNumber": 0,
+                            "callUID": 5,
+                            "bailoutReason": "",
+                            "id": 16,
+                            "scriptId": 0,
+                            "hitCount": 4,
+                            "children": []
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "functionName": "(program)",
+        "url": "",
+        "lineNumber": 0,
+        "callUID": 12,
+        "bailoutReason": "",
+        "id": 12,
+        "scriptId": 0,
+        "hitCount": 178,
+        "children": []
+      },
+      {
+        "functionName": "(garbage collector)",
+        "url": "",
+        "lineNumber": 0,
+        "callUID": 13,
+        "bailoutReason": "",
+        "id": 13,
+        "scriptId": 0,
+        "hitCount": 6,
+        "children": []
+      },
+      {
+        "functionName": "(idle)",
+        "url": "",
+        "lineNumber": 0,
+        "callUID": 14,
+        "bailoutReason": "",
+        "id": 17,
+        "scriptId": 0,
+        "hitCount": 2033,
+        "children": []
+      }
+    ]
+  },
+  "startTime": 481087,
+  "endTime": 481092
+}
