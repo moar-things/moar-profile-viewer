@@ -77,6 +77,19 @@
       it from an input button on the page.
     </p>
 
+    <p>
+      There are a handful of existing <tt>.cpuprofile</tt> files available
+      in the
+      <a href="https://github.com/moar-things/moar-profile-viewer/tree/master/test/fixtures">
+        moar-profile-viewer repository under <tt>test/fixtures</tt>
+      </a>.
+      You probably want to try the "real life" on of a run of
+      <tt>npm update</tt>, which you can download via this link:
+      <a download="npm-update.moar.cpuprofile" href="https://raw.githubusercontent.com/moar-things/moar-profile-viewer/master/test/fixtures/npm-update.moar.cpuprofile">
+        <tt>npm-update.moar.cpuprofile</tt>
+      </a>.
+    </p>
+
     <h2>anatomy of moar profile viewer</h2>
 
     <p>Below is the web page with a profile loaded.</p>
@@ -92,7 +105,9 @@
       </li>
       <li>
         the pane on the bottom left displays information about
-        the currently selected function
+        the currently selected function, including what functions
+        call the currently selected function, and what functions are
+        called by the currently selected function
       </li>
       <li>
         the pane on the bottom right displays source for the
