@@ -1070,12 +1070,13 @@ exports.fnSelected = fnSelected
 
 const jQuery = window.jQuery
 
+const utils = require('./utils')
 const fnInformer = require('./fn-informer')
 const sourceFormatter = require('./source-formatter')
 
 let CurrentRecords = null
 let CurrentSort = 'total'
-let CurrentSelectedRecordTR = null
+let CurrentSelectedFn = null
 
 function load (profile, profileName) {
   window.MoarProfileViewer.profile = profile
@@ -1138,7 +1139,7 @@ function showUser (event) {
   jQuery('.records-table').addClass('show-user')
 }
 
-function showCurrent (event) {
+function showAllUserCurrent (event) {
   ShowUser ? showUser() : showAll()
 }
 
@@ -1151,21 +1152,24 @@ function scopeScript (event) {
 function scopePackage (event) {
 }
 
+function scrollIntoViewFunctionRecord (scrollRecord) {
+  if (CurrentSelectedFn == null) return
+
+  if (scrollRecord) utils.scrollIntoView(jQuery(`#fn-record-${CurrentSelectedFn.id}`)[0])
+  utils.scrollIntoView(jQuery(`#source-fn-${CurrentSelectedFn.id}`)[0])
+}
+
+function highlightSelectedFunctionRecord () {
+  if (CurrentSelectedFn == null) return
+
+  jQuery('table.records-table tr.selected').removeClass('selected')
+  jQuery(`#fn-record-${CurrentSelectedFn.id}`).addClass('selected')
+}
+
 function fnSelected (fnID, scroll) {
   if (scroll == null) scroll = true
 
   const profile = window.MoarProfileViewer.profile
-
-  if (scroll) jQuery(`#fn-record-${fnID}`)[0].scrollIntoView()
-
-  if (CurrentSelectedRecordTR != null) {
-    jQuery(CurrentSelectedRecordTR).removeClass('selected')
-  }
-
-  if (window.event.currentTarget != null) {
-    CurrentSelectedRecordTR = window.event.currentTarget
-    jQuery(CurrentSelectedRecordTR).addClass('selected')
-  }
 
   const jelContentL = jQuery('#content-l')
   const jelContentR = jQuery('#content-r')
@@ -1179,6 +1183,10 @@ function fnSelected (fnID, scroll) {
     jelSourceUrl.text('source')
     return
   }
+
+  CurrentSelectedFn = fn
+
+  highlightSelectedFunctionRecord()
 
   const infoHtml = fnInformer.getInfoHtml(profile, fn)
   jelContentL.html(infoHtml)
@@ -1196,14 +1204,14 @@ function fnSelected (fnID, scroll) {
   const totalTime = profile.totalTime
   jelContentR.html(sourceFormatter.format(source, fn.script, totalTime))
 
-  setTimeout(() => {
-    showCurrent()
-    const fnEl = jQuery(`#source-fn-${fn.id}`)[0]
-    if (fnEl != null) fnEl.scrollIntoView()
-  }, 10)
-
   jelFnInfo.text(`${fn.name}()`)
   jelSourceUrl.text(sourceName)
+
+  showAllUserCurrent()
+  setTimeout(
+    () => scrollIntoViewFunctionRecord(scroll),
+    10
+  )
 }
 
 function updateMeta (meta) {
@@ -1230,6 +1238,7 @@ function displayRecords () {
 
   html.push('<table class="records-table show-user full-width">')
 
+  html.push('<thead>')
   html.push('<tr>')
   html.push(`<td><b>function</b></td>`)
   html.push(`<td style="text-align:center;" colspan="2"><b>total time</b></td>`)
@@ -1237,7 +1246,9 @@ function displayRecords () {
   html.push(`<td><b>script</b></td>`)
   html.push(`<td><b>package</b></td>`)
   html.push('</tr>')
+  html.push('</thead>')
 
+  html.push('<tbody>')
   for (let record of CurrentRecords) {
     const onClick = `MoarProfileViewer.fnSelected('${record.id}', false)`
     const userSys = record.isSystem ? 'isSystem' : 'isUser'
@@ -1253,9 +1264,20 @@ function displayRecords () {
     html.push('</tr>')
   }
 
+  html.push('</tbody>')
   html.push('</table>')
 
   jelContentT.html(html.join('\n'))
+
+  showAllUserCurrent()
+
+  setTimeout(
+    () => {
+      highlightSelectedFunctionRecord()
+      scrollIntoViewFunctionRecord(true)
+    },
+    10
+  )
 }
 
 function getFunctionRecords (profile) {
@@ -1321,11 +1343,12 @@ function reduce (arr, init, fn) {
   return arr.reduce(fn, init)
 }
 
-},{"./fn-informer":8,"./source-formatter":13}],15:[function(require,module,exports){
+},{"./fn-informer":8,"./source-formatter":13,"./utils":15}],15:[function(require,module,exports){
 'use strict'
 
 exports.escapeHtml = escapeHtml
 exports.rightPad = rightPad
+exports.scrollIntoView = scrollIntoView
 
 function escapeHtml (string) {
   if (string == null) return ''
@@ -1340,6 +1363,13 @@ function rightPad (string, len, fill) {
   string = `${string}`
   while (string.length < len) string = `${fill}${string}`
   return string
+}
+
+function scrollIntoView (element) {
+  if (element == null) return
+  if (typeof element.scrollIntoView !== 'function') return
+
+  element.scrollIntoView({behavior: 'smooth'})
 }
 
 },{}],16:[function(require,module,exports){
