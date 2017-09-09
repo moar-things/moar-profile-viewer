@@ -13,7 +13,7 @@ body {
 body {
   font-size: 100%;
   font-family: sans-serif;
-  background-color: #F7F7FF;
+  background-color: #F7F7F7;
 }
 .scroll {
   overflow: scroll;
@@ -41,9 +41,9 @@ body {
 #toolbar-t {
   grid-area: toolbar-t;
   padding: 0.5em;
-  background-color: #dedeff;
+  background-color: #DDF;
   border-top: 3px solid #AAA;
-  border-bottom: thin solid #dddddd;
+  border-bottom: thin solid #AAA;
 }
 #content-t {
   grid-area: content-t;
@@ -54,9 +54,9 @@ body {
 #toolbar-l {
   grid-area: toolbar-l;
   padding: 0.5em;
-  background-color: #dedeff;
+  background-color: #DDF;
   border-right: 3px solid #777;
-  border-bottom: thin solid #dddddd;
+  border-bottom: thin solid #AAA;
 }
 #content-l {
   grid-area: content-l;
@@ -67,8 +67,8 @@ body {
 #toolbar-r {
   grid-area: toolbar-r;
   padding: 0.5em;
-  background-color: #dedeff;
-  border-bottom: thin solid #dddddd;
+  background-color: #DDF;
+  border-bottom: thin solid #AAA;
 }
 #content-r {
   grid-area: content-r;
@@ -191,6 +191,9 @@ body {
   border: thin solid #AAA;
   border-radius: 0.5em;
   padding: 0.25em 0.5em;
+}
+#profile-meta .bordered {
+  background-color: #F7F7F7;
 }
 table.show-user tr.isSystem {
   display: none;
