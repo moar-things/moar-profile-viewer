@@ -1,5 +1,5 @@
 @border-thin: thin;
-@border-thick: 2px;
+@border-thick: 3px;
 
 #main {
   display: grid;
@@ -37,13 +37,14 @@
   grid-area: content-t;
   padding: 0.5em;
   overflow: scroll;
+  border-bottom: @border-thick solid #777;
 }
 
 #toolbar-l {
   grid-area: toolbar-l;
   padding: 0.5em;
   background-color: @toolbar-background-color;
-  border-right: @border-thick solid #AAA;
+  border-right: @border-thick solid #777;
   border-bottom: @border-thin solid @border-color-lite;
 }
 
@@ -51,7 +52,7 @@
   grid-area: content-l;
   padding: 0.5em;
   overflow: scroll;
-  border-right: @border-thick solid #AAA;
+  border-right: @border-thick solid #777;
 }
 
 #toolbar-r {

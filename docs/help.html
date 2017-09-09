@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="images/moar.png" />
+    <title>moar profile viewer - help</title>
+    <style>
+      .red-box {
+        background-color: red;
+        color: white;
+        padding: 0.1em 0.3em;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>moar profile viewer - help</h1>
+
+    <p>
+      The moar profile viewer, available at
+      <a href="https://moar-things.github.io/moar-profile-viewer">
+        https://moar-things.github.io/moar-profile-viewer
+      </a>,
+      can be used to view v8 CPU profiles generated for Node.js
+      applications.
+    </p>
+
+    <p>
+      For more information and background on CPU profiles, see the article
+      <a href="https://developers.google.com/web/tools/chrome-devtools/rendering-tools/js-execution">
+        Speed Up JavaScript Execution
+      </a>.
+    </p>
+
+    <h2>generating a cpu profile file</h2>
+
+    <p>
+      The following tools can be used to generate a v8 CPU profile for
+      Node.js:
+    </p>
+
+    <ul>
+      <li>
+        <a href="https://github.com/moar-things/moar-profiler">
+          moar-profiler
+        </a>
+      </li>
+
+      <li>
+        <a href="https://medium.com/@paul_irish/debugging-node-js-nightlies-with-chrome-devtools-7c4a1b95ae27">
+          Chrome DevTools
+        </a>
+      </li>
+
+      <li>
+        <a href="https://nodesource.com/products/nsolid">
+          NodeSource's N|Solid product
+        </a>
+      </li>
+
+      <li>
+        <a href="https://www.npmjs.com/package/v8-profiler">
+          v8-profiler package at npm
+        </a>
+      </li>
+    </ul>
+
+    <p>
+      Most tools generate CPU profile files with a file extension of
+      <tt>.cpuprofile</tt> .  Once you have a CPU profile file, you
+      can view it by visiting
+      <a href="https://moar-things.github.io/moar-profile-viewer">
+        https://moar-things.github.io/moar-profile-viewer
+      </a> . You can either drag the file onto the web page, or load
+      it from an input button on the page.
+    </p>
+
+    <h2>anatomy of moar profile viewer</h2>
+
+    <p>Below is the web page with a profile loaded.</p>
+
+    <p><img src="images/screen-cap-annotated.png" width="100%"></p>
+
+    <p>The page is split into three panes:</p>
+
+    <ul>
+      <li>
+        the top pane displays a table of functions used by
+        your application, sorted by time used
+      </li>
+      <li>
+        the pane on the bottom left displays information about
+        the currently selected function
+      </li>
+      <li>
+        the pane on the bottom right displays source for the
+        currently selected function, when available
+      </li>
+    </ul>
+
+    <p>
+      The source code in the bottom right pane is annotated with blue and
+      red lines and bubbles.  The blue lines and bubbles indicate
+      functions which are listed in the top pane.  The red lines provide
+      additional information about lines within a function.
+    </p>
+
+    <p>
+      To load a CPU profile from within this page, click the file
+      upload button shown at <span class="red-box">A</span>, which
+      will prompt you for a file to load.  Or you can drag and drop
+      a file onto the web page.
+    </p>
+
+    <p>
+      You can "zoom" into a pane (hiding the other panes) by clicking
+      the "zoom buttons" shown at <span class="red-box">B</span>.
+    </p>
+
+    <p>
+      Information about your Node.js process is shown on the line
+      at <span class="red-box">C</span>.  This information is only
+      available with profiles generated with moar-profiler.
+    </p>
+
+    <p>
+      Functions in the top pane can be sorted by total time or self
+      time, by clicking the respective buttons at
+      <span class="red-box">D</span>.
+    </p>
+
+    <p>
+      By default, only functions shown in "user" code is displayed.
+      "User" code is code not shipped with the Node.js runtime; eg,
+      the built-in modules fs, path, etc, are not "user" code.  You
+      can change to show all code, or back to just "user" code,
+      by clicking the respective buttons at
+      <span class="red-box">E</span>.
+    </p>
+
+    <p>
+      The "link" image beside package names, shown at
+      <span class="red-box">F</span>, will open that package's page
+      at npmjs.org, when clicked.
+    </p>
+
+    <p>
+      Where functions are shown in the bottom panes, they can be
+      clicked to change the page to show information about that
+      function.  Examples are shown at <span class="red-box">G</span>.
+    </p>
+
+    <!-- Google Analytics -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-106145082-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  </body>
+</html>

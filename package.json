@@ -4,13 +4,13 @@
   "description": "converts cpuprofile files to call graphs",
   "license": "MIT",
   "author": "Patrick Mueller <pmuellr@apache.org> (https://github.com/pmuellr)",
-  "homepage": "https://github.com/pmuellr/moar-profile-viewer",
+  "homepage": "https://github.com/moar-things/moar-profile-viewer",
   "repository": {
     "type": "git",
-    "url": "https://github.com/pmuellr/moar-profile-viewer.git"
+    "url": "https://github.com/moar-things/moar-profile-viewer.git"
   },
   "bugs": {
-    "url": "https://github.com/pmuellr/moar-profile-viewer/issues"
+    "url": "https://github.com/moar-things/moar-profile-viewer/issues"
   },
   "scripts": {
     "build": "node tools/build",
@@ -41,7 +41,6 @@
     "standard": "~10.0.3",
     "tap-spec": "~4.1.1",
     "tape": "~4.8.0",
-    "viz.js": "~1.8.0",
     "yield-callback": "~1.0.0"
   }
 }

@@ -42,26 +42,27 @@ body {
   grid-area: toolbar-t;
   padding: 0.5em;
   background-color: #dedeff;
-  border-top: 2px solid #AAA;
+  border-top: 3px solid #AAA;
   border-bottom: thin solid #dddddd;
 }
 #content-t {
   grid-area: content-t;
   padding: 0.5em;
   overflow: scroll;
+  border-bottom: 3px solid #777;
 }
 #toolbar-l {
   grid-area: toolbar-l;
   padding: 0.5em;
   background-color: #dedeff;
-  border-right: 2px solid #AAA;
+  border-right: 3px solid #777;
   border-bottom: thin solid #dddddd;
 }
 #content-l {
   grid-area: content-l;
   padding: 0.5em;
   overflow: scroll;
-  border-right: 2px solid #AAA;
+  border-right: 3px solid #777;
 }
 #toolbar-r {
   grid-area: toolbar-r;

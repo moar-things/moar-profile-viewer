@@ -868,11 +868,11 @@ function displayPrivacy () {
 }
 
 const PrivacyText = `
-This application collects typical page view information Google Analytics.
+This application collects information with Google Analytics.
 
-It also collects information when profiles are loaded, but only that a profile was loaded, not the name of the profile file, nor it's data.
+It collects pageviews for the primary page.  It also sends an event when attempts are made to load a profile, and when a profile is loaded successfully.  No data associated with the profile - name or data - is sent with those events, just that the attempt was made, and that the profile was loaded successfully.
 
-But that's it.  Enjoy.
+That's it.  Enjoy.
 `
 
 },{}],11:[function(require,module,exports){
@@ -2075,13 +2075,13 @@ module.exports={
   "description": "converts cpuprofile files to call graphs",
   "license": "MIT",
   "author": "Patrick Mueller <pmuellr@apache.org> (https://github.com/pmuellr)",
-  "homepage": "https://github.com/pmuellr/moar-profile-viewer",
+  "homepage": "https://github.com/moar-things/moar-profile-viewer",
   "repository": {
     "type": "git",
-    "url": "https://github.com/pmuellr/moar-profile-viewer.git"
+    "url": "https://github.com/moar-things/moar-profile-viewer.git"
   },
   "bugs": {
-    "url": "https://github.com/pmuellr/moar-profile-viewer/issues"
+    "url": "https://github.com/moar-things/moar-profile-viewer/issues"
   },
   "scripts": {
     "build": "node tools/build",
@@ -2112,7 +2112,6 @@ module.exports={
     "standard": "~10.0.3",
     "tap-spec": "~4.1.1",
     "tape": "~4.8.0",
-    "viz.js": "~1.8.0",
     "yield-callback": "~1.0.0"
   }
 }

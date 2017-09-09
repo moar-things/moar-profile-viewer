@@ -7,19 +7,15 @@ than v8 generates.
 
 The `moar-profile-viewer` can be used to view those profiles.
 
-The viewer can be deployed as static web files, or as a server.  More function
-is available when running as a server.
+![screen capture](docs/images/screen-cap.png)
 
+Currently the view is implemented as a static web application, which can be
+deployed anywhere a static web site can be deployed.  It's currently deployed
+publicly at https://moar-things.github.io/moar-profile-viewer/
 
-install
-================================================================================
+Help is available within the application.
 
-    npm install moar-profile-viewer
-
-
-reference
-================================================================================
-
+[moar-profiler]: https://github.com/moar-things/moar-profiler
 
 
 license
