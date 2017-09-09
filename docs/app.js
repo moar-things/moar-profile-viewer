@@ -779,17 +779,6 @@ function getInfoHtml (profile, fn) {
   html.push(createTableRows('calls', fn.children, profile.totalTime))
   html.push('</table>')
 
-//  if (callers.length === 0) {
-//    html.push('<li><i>none</i></li>')
-//  }
-//  for (let caller of callers) {
-//    const onClick = `MoarProfileViewer.fnSelected('${caller.id}')`
-//    html.push(`<li class="clickable" onclick="${onClick}">`)
-//    html.push(`${utils.escapeHtml(caller.name)}()`)
-//    html.push(`</li>`)
-//  }
-//  html.push('</ul>')
-
   return html.join('\n')
 }
 
@@ -802,7 +791,7 @@ function createTableRows (name, objects, profileTime) {
   html.push('</tr>')
 
   for (let object of objects) {
-    const onClick = `MoarProfileViewer.fnSelected('${object.id}', false)`
+    const onClick = `MoarProfileViewer.fnSelected('${object.id}', true)`
     const userSys = object.isSystem ? 'isSystem' : 'isUser'
 
     const totalTime = Math.round(object.totalTime / 1000)
