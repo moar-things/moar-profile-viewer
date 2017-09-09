@@ -91,7 +91,7 @@ function getPackageInfo (url) {
   }
 }
 
-},{"path":16}],2:[function(require,module,exports){
+},{"path":17}],2:[function(require,module,exports){
 'use strict'
 
 // convert a profile from v8profiler to inspector 1.2 format
@@ -224,13 +224,15 @@ module.exports = create
 
 const path = require('path')
 
+const googAnalytics = require('./google-analytics')
+
 const convertV8ProfilerToInspector12 = require('./convert-v8-to-12')
 const convertInspector12ToMoarProfiler = require('./convert-12-to-moar')
 
-// const Logger = require('./logger').getLogger(__filename)
-
 // create raw profile data into objects
 function create (profileData) {
+  googAnalytics.sendEvent({eventCategory: 'profile-load', eventAction: 'attempt'})
+
   if (!isMoarProfiler(profileData)) {
     if (isV8Profiler(profileData)) profileData = convertV8ProfilerToInspector12(profileData)
     if (isInspector12(profileData)) profileData = convertInspector12ToMoarProfiler(profileData)
@@ -238,6 +240,8 @@ function create (profileData) {
 
   if (profileData == null) return null
   if (!isMoarProfiler(profileData)) return null
+
+  googAnalytics.sendEvent({eventCategory: 'profile-load', eventAction: 'success'})
 
   return buildProfile(profileData)
 }
@@ -663,14 +667,26 @@ class Pkg {}
 class Line {}
 class Dependency {}
 
-},{"./convert-12-to-moar":1,"./convert-v8-to-12":2,"path":16}],4:[function(require,module,exports){
+},{"./convert-12-to-moar":1,"./convert-v8-to-12":2,"./google-analytics":4,"path":17}],4:[function(require,module,exports){
+'use strict'
+
+exports.sendEvent = sendEvent
+
+function sendEvent (args) {
+  if (typeof window === 'undefined') return
+  if (typeof window.ga !== 'function') return
+
+  window.ga('send', 'event', args)
+}
+
+},{}],5:[function(require,module,exports){
 'use strict'
 
 const create = require('./create')
 
 exports.create = create
 
-},{"./create":3}],5:[function(require,module,exports){
+},{"./create":3}],6:[function(require,module,exports){
 'use strict'
 
 exports.initialize = initialize
@@ -706,7 +722,7 @@ class DropHandler extends EventEmitter {
   }
 }
 
-},{"./profile-reader":11,"events":15}],6:[function(require,module,exports){
+},{"./profile-reader":12,"events":16}],7:[function(require,module,exports){
 'use strict'
 
 exports.initialize = initialize
@@ -728,7 +744,7 @@ function fileSelected () {
   profileReader.load(el.files[0])
 }
 
-},{"./profile-reader":11}],7:[function(require,module,exports){
+},{"./profile-reader":12}],8:[function(require,module,exports){
 'use strict'
 
 exports.getInfoHtml = getInfoHtml
@@ -802,7 +818,7 @@ function createTableRows (name, objects, profileTime) {
   return html.join('\n')
 }
 
-},{"./utils":14}],8:[function(require,module,exports){
+},{"./utils":15}],9:[function(require,module,exports){
 'use strict'
 
 const jQuery = window.jQuery
@@ -842,7 +858,7 @@ function whenReady () {
   jQuery('#version').text(`v${thisPackage.version}`)
 }
 
-},{"../../package.json":18,"./drop-handler":5,"./file-reader":6,"./modal-displayer":9,"./pane-zoomer":10,"./ui":13}],9:[function(require,module,exports){
+},{"../../package.json":19,"./drop-handler":6,"./file-reader":7,"./modal-displayer":10,"./pane-zoomer":11,"./ui":14}],10:[function(require,module,exports){
 'use strict'
 
 exports.displayPrivacy = displayPrivacy
@@ -859,7 +875,7 @@ It also collects information when profiles are loaded, but only that a profile w
 But that's it.  Enjoy.
 `
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 'use strict'
 
 exports.initialize = initialize
@@ -896,7 +912,7 @@ function getPaneName (jelPane) {
   return match[1]
 }
 
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 'use strict'
 
 exports.load = load
@@ -936,7 +952,7 @@ function reportError (file, message) {
   window.alert(`error reading ${file.name}: ${message}`)
 }
 
-},{"../profile":4,"./ui":13}],12:[function(require,module,exports){
+},{"../profile":5,"./ui":14}],13:[function(require,module,exports){
 'use strict'
 
 exports.format = format
@@ -1050,7 +1066,7 @@ function getLineHits (script) {
   return result
 }
 
-},{"./utils":14}],13:[function(require,module,exports){
+},{"./utils":15}],14:[function(require,module,exports){
 'use strict'
 
 exports.load = load
@@ -1316,7 +1332,7 @@ function reduce (arr, init, fn) {
   return arr.reduce(fn, init)
 }
 
-},{"./fn-informer":7,"./source-formatter":12}],14:[function(require,module,exports){
+},{"./fn-informer":8,"./source-formatter":13}],15:[function(require,module,exports){
 'use strict'
 
 exports.escapeHtml = escapeHtml
@@ -1337,7 +1353,7 @@ function rightPad (string, len, fill) {
   return string
 }
 
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -1641,7 +1657,7 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}],16:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 (function (process){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -1870,7 +1886,7 @@ var substr = 'ab'.substr(-1) === 'b'
 
 }).call(this,require('_process'))
 
-},{"_process":17}],17:[function(require,module,exports){
+},{"_process":18}],18:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -2052,7 +2068,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],18:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 module.exports={
   "name": "moar-profile-viewer",
   "version": "0.0.1",
@@ -2101,7 +2117,7 @@ module.exports={
   }
 }
 
-},{}]},{},[8])
+},{}]},{},[9])
 // sourceMappingURL annotation removed by cat-source-map
 
 //# sourceMappingURL=app.js.map.json
