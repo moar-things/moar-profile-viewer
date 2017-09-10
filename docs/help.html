@@ -7,6 +7,9 @@
     <link rel="shortcut icon" href="images/moar.png" />
     <title>moar profile viewer - help</title>
     <style>
+      body {
+        font-size: 120%;
+      }
       .red-box {
         background-color: red;
         color: white;
@@ -28,7 +31,7 @@
     </p>
 
     <p>
-      For more information and background on CPU profiles, see the article
+      For more information and background on v8 CPU profiles, see the article
       <a href="https://developers.google.com/web/tools/chrome-devtools/rendering-tools/js-execution">
         Speed Up JavaScript Execution
       </a>.
@@ -78,10 +81,10 @@
     </p>
 
     <p>
-      There are a handful of existing <tt>.cpuprofile</tt> files available
+      There are a few <tt>.cpuprofile</tt> files available
       in the
       <a href="https://github.com/moar-things/moar-profile-viewer/tree/master/test/fixtures">
-        moar-profile-viewer repository under <tt>test/fixtures</tt>
+        moar-profile-viewer repository in the <tt>test/fixtures</tt> directory
       </a>.
       You probably want to try the "real life" on of a run of
       <tt>npm update</tt>, which you can download via this link:
@@ -118,8 +121,8 @@
     <p>
       The source code in the bottom right pane is annotated with blue and
       red lines and bubbles.  The blue lines and bubbles indicate
-      functions which are listed in the top pane.  The red lines provide
-      additional information about lines within a function.
+      functions which are listed in the top pane.  The red lines and bubbles
+      are lines within a function which the profile recorded statistics for.
     </p>
 
     <p>
@@ -166,6 +169,27 @@
       clicked to change the page to show information about that
       function.  Examples are shown at <span class="red-box">G</span>.
     </p>
+
+    <h2>need moar help?</h2>
+
+    <p>
+      If you are having problems using the <tt>moar-profiler</tt> tool
+      or the moar profile viewer web page, consider opening an issue
+      at GitHub on the respective repository:
+    </p>
+
+    <ul>
+      <li>
+        <a href="https://github.com/moar-things/moar-profile-viewer">
+          https://github.com/moar-things/<b>moar-profile-viewer</b>
+        </a>
+      </li>
+      <li>
+        <a href="https://github.com/moar-things/moar-profiler">
+          https://github.com/moar-things/<b>moar-profiler</b>
+        </a>
+      </li>
+    </ul>
 
     <!-- Google Analytics -->
     <script>
