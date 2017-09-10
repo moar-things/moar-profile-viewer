@@ -761,23 +761,23 @@ function getInfoHtml (profile, fn) {
   if (fn.pkg.version == null) {
     pkg = utils.escapeHtml(pkg)
   } else {
-    pkgLink = `https://npmjs.org/package/${fn.pkg.name}`
+    pkgLink = `https://npmjs.org/package/${utils.escapeHtml(fn.pkg.name)}`
     pkg += ` @ ${fn.pkg.version}`
     pkg = `${utils.escapeHtml(pkg)}`
   }
 
   html.push(`<p>package: <b>${pkg}</b>&nbsp;&nbsp;`)
   if (pkgLink != null) {
-    html.push(`<a href="https://npmjs.org/package/${fn.pkg.name}" target="npm-${fn.pkg.name}">`)
+    html.push(`<a href="${pkgLink}" target="npm-${utils.escapeHtml(fn.pkg.name)}">`)
     html.push('<img src="images/open-iconic/external-link-8x.png" alt="npm" width="12px">')
     html.push('</a>')
   }
   html.push('</p>')
 
   html.push('<table class="records-table show-user full-width">')
-  html.push(createTableRows('callers', fn.parents, profile.totalTime))
-  html.push('<tr><td colspan="3">&nbsp;</td></tr>')
   html.push(createTableRows('calls', fn.children, profile.totalTime))
+  html.push('<tr><td colspan="4">&nbsp;</td></tr>')
+  html.push(createTableRows('callers', fn.parents, profile.totalTime))
   html.push('</table>')
 
   return html.join('\n')
@@ -797,28 +797,28 @@ function createTableRows (name, objects, profileTime) {
 
   objects.sort(objectSort)
 
-  html.push('<tr>')
-  html.push(`<td><b>${name}</b></td>`)
+  html.push('<tr class="header">')
+  html.push(`<td><b>${utils.escapeHtml(name)}</b></td>`)
   html.push(`<td style="text-align:center;" colspan="2"><b>total time</b></td>`)
   html.push(`<td><b>package</b></td>`)
   html.push('</tr>')
 
   for (let object of objects) {
-    const onClick = `MoarProfileViewer.fnSelected('${object.id}', true)`
+    const onClick = `MoarProfileViewer.fnSelected('${utils.escapeHtml(object.id)}', true)`
     const userSys = object.isSystem ? 'isSystem' : 'isUser'
 
     const totalTime = Math.round(object.totalTime / 1000)
     const totalPercent = Math.round(100 * object.totalTime / profileTime)
 
     let pkg = object.pkg
-    let pkgName = pkg.name
-    if (pkg.version) pkgName += ' @ ' + pkg.version
+    let pkgName = utils.escapeHtml(pkg.name)
+    if (pkg.version) pkgName += ' @ ' + utils.escapeHtml(pkg.version)
     if (!pkg.isSystemOrUnknown) {
-      pkgName += ` &nbsp;&nbsp;<a href="https://npmjs.org/package/${pkg.name}" target="npm-${pkg.name}"><img src="images/open-iconic/external-link-8x.png" alt="npm" width="12px"></a>`
+      pkgName += ` &nbsp;&nbsp;<a href="https://npmjs.org/package/${utils.escapeHtml(pkg.name)}" target="npm-${utils.escapeHtml(pkg.name)}"><img src="images/open-iconic/external-link-8x.png" alt="npm" width="12px"></a>`
     }
 
-    html.push(`<tr id="fn-record-${object.id}"class="clickable ${userSys}" onclick="${onClick}">`)
-    html.push(`<td>${object.name}</td>`)
+    html.push(`<tr id="fn-record-${utils.escapeHtml(object.id)}"class="clickable ${userSys}" onclick="${onClick}">`)
+    html.push(`<td>${utils.escapeHtml(object.name)}</td>`)
     html.push(`<td style="text-align:right;">${totalTime}&nbsp;ms</td>`)
     html.push(`<td style="text-align:right;">${totalPercent}%</td>`)
     html.push(`<td>${pkgName}</td>`)
@@ -986,8 +986,8 @@ function format (source, script, profileTime) {
   for (let fn of script.fns) {
     const lineNo = (fn.line || 1) - 1
     shownLines.add(lineNo)
-    const onClick = `MoarProfileViewer.fnSelected('${fn.id}')`
-    lines[lineNo] = `<span class="source-line-function clickable" id="source-fn-${fn.id}" onclick="${onClick}">${lines[lineNo] || ''}</span>`
+    const onClick = `MoarProfileViewer.fnSelected('${utils.escapeHtml(fn.id)}')`
+    lines[lineNo] = `<span class="source-line-function clickable" id="source-fn-${utils.escapeHtml(fn.id)}" onclick="${onClick}">${lines[lineNo] || ''}</span>`
   }
 
   // wrap linehit lines
@@ -1019,7 +1019,7 @@ function format (source, script, profileTime) {
     newLine.push(`self time: ${selfTime} ms, ${selfPercent}%`)
     newLine.push('</span>')
 
-    const onClick = `MoarProfileViewer.fnSelected('${fn.id}')`
+    const onClick = `MoarProfileViewer.fnSelected('${utils.escapeHtml(fn.id)}')`
     lines[lineNo] = `${lines[lineNo]}<div class="clickable source-annotation" onclick="${onClick}">${newLine.join('')}</div>`
   }
 
@@ -1118,7 +1118,7 @@ function load (profile, profileName) {
   jQuery('#source-url').text('source')
   jQuery('#fn-info').text('info')
 
-  jQuery('#profile-name').text(profileName)
+  jQuery('#profile-name').text(utils.escapeHtml(profileName))
   window.document.title = `${profileName} - moar profile viewer`
 }
 
@@ -1199,8 +1199,8 @@ function fnSelected (fnID, scroll) {
 
   const fn = profile.fns.filter(fn => fn.id === fnID)[0]
   if (fn == null) {
-    jelContentL.text(`internal error: can't locate function with id ${fnID}`)
-    jelContentR.text(`internal error: can't locate function with id ${fnID}`)
+    jelContentL.text(`internal error: can't locate function with id ${utils.escapeHtml(fnID)}`)
+    jelContentR.text(`internal error: can't locate function with id ${utils.escapeHtml(fnID)}`)
     jelSourceUrl.text('source')
     return
   }
@@ -1226,7 +1226,7 @@ function fnSelected (fnID, scroll) {
   jelContentR.html(sourceFormatter.format(source, fn.script, totalTime))
 
   jelFnInfo.text(`${fn.name}()`)
-  jelSourceUrl.text(sourceName)
+  jelSourceUrl.text(utils.escapeHtml(sourceName))
 
   showAllUserCurrent()
   setTimeout(
@@ -1242,12 +1242,17 @@ function updateMeta (meta) {
 
   const html = []
 
+  const metaDate = utils.escapeHtml(meta.date.replace('T', ' '))
+  const metaMain = utils.escapeHtml(meta.mainModule)
+  const metaNode = utils.escapeHtml(meta.nodeVersion)
+  const metaPlat = utils.escapeHtml(`${meta.platform}/${meta.arch}`)
+
   html.push('<br>&nbsp;<br>')
   html.push('<span>')
-  html.push(`<span class="bordered">${meta.date.replace('T', ' ')}</span>`)
-  html.push(`<span class="bordered">${meta.mainModule}</span>`)
-  html.push(`<span class="bordered">node ${meta.nodeVersion}</span>`)
-  html.push(`<span class="bordered">${meta.platform}/${meta.arch}</span>`)
+  html.push(`<span class="bordered">${metaDate}</span>`)
+  html.push(`<span class="bordered">${metaMain}</span>`)
+  html.push(`<span class="bordered">node ${metaNode}</span>`)
+  html.push(`<span class="bordered">${metaPlat}</span>`)
   html.push('</span>')
 
   jelMeta.html(html.join('\n'))
@@ -1271,7 +1276,7 @@ function displayRecords () {
 
   html.push('<tbody>')
   for (let record of CurrentRecords) {
-    const onClick = `MoarProfileViewer.fnSelected('${record.id}', false)`
+    const onClick = `MoarProfileViewer.fnSelected('${utils.escapeHtml(record.id)}', false)`
     const userSys = record.isSystem ? 'isSystem' : 'isUser'
 
     html.push(`<tr id="fn-record-${record.id}"class="clickable ${userSys}" onclick="${onClick}">`)
@@ -1280,7 +1285,7 @@ function displayRecords () {
     html.push(`<td style="text-align:right;">${record.totalPercent}%</td>`)
     html.push(`<td style="text-align:right;">${record.selfTime}&nbsp;ms</td>`)
     html.push(`<td style="text-align:right;">${record.selfPercent}%</td>`)
-    html.push(`<td>${record.script}</td>`)
+    html.push(`<td>${utils.escapeHtml(record.script)}</td>`)
     html.push(`<td>${record.pkg}</td>`)
     html.push('</tr>')
   }
@@ -1305,10 +1310,10 @@ function getFunctionRecords (profile) {
   let id = 0
   return profile.fns.map(fn => {
     let pkg = fn.script.pkg
-    let pkgName = pkg.name
-    if (pkg.version) pkgName += ' @ ' + pkg.version
+    let pkgName = utils.escapeHtml(pkg.name)
+    if (pkg.version) pkgName += ' @ ' + utils.escapeHtml(pkg.version)
     if (!pkg.isSystemOrUnknown) {
-      pkgName += ` &nbsp;&nbsp;<a href="https://npmjs.org/package/${pkg.name}" target="npm-${pkg.name}"><img src="images/open-iconic/external-link-8x.png" alt="npm" width="12px"></a>`
+      pkgName += ` &nbsp;&nbsp;<a href="https://npmjs.org/package/${utils.escapeHtml(pkg.name)}" target="npm-${utils.escapeHtml(pkg.name)}"><img src="images/open-iconic/external-link-8x.png" alt="npm" width="12px"></a>`
     }
 
     let name = fn.name
@@ -1316,6 +1321,7 @@ function getFunctionRecords (profile) {
       name = `${name.substr(0, 20)} ...`
     }
 
+    name = utils.escapeHtml(name)
     if (fn.name.startsWith('(')) name = `<i>${name}</i>`
 
     const selfTime = getSelfTime(fn)
@@ -1377,6 +1383,8 @@ function escapeHtml (string) {
     .replace('&', '&amp;')
     .replace('<', '&lt;')
     .replace('>', '&gt;')
+    .replace('"', '&quot;')
+    .replace(`'`, '&#39;')
 }
 
 function rightPad (string, len, fill) {

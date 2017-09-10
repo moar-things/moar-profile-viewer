@@ -216,6 +216,9 @@ table tr.selected {
 thead td {
   border-bottom: thin solid #777;
 }
+tr.header td {
+  border-bottom: thin solid #777;
+}
 .source-lines {
   font-size: 10pt;
   font-family: monospace;
