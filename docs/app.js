@@ -1113,8 +1113,10 @@ function load (profile, profileName) {
 
   updateMeta(profile.meta)
 
-  jQuery('#content-l').html('')
-  jQuery('#content-r').html('')
+  const initialContent = '<div id="initial-content-t">click a function above to see details here</div>'
+
+  jQuery('#content-l').html(initialContent)
+  jQuery('#content-r').html(initialContent)
   jQuery('#source-url').text('source')
   jQuery('#fn-info').text('info')
 
