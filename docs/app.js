@@ -738,10 +738,11 @@ function initialize () {
 
 function fileSelected () {
   const el = jQuery('#file-input')[0]
-  const files = el.files
-  if (files.length === 0) return
+  const file = el.files[0]
 
-  profileReader.load(el.files[0])
+  if (file != null) profileReader.load(file)
+
+  el.value = ''
 }
 
 },{"./profile-reader":12}],8:[function(require,module,exports){
@@ -2107,6 +2108,10 @@ process.off = noop;
 process.removeListener = noop;
 process.removeAllListeners = noop;
 process.emit = noop;
+process.prependListener = noop;
+process.prependOnceListener = noop;
+
+process.listeners = function (name) { return [] }
 
 process.binding = function (name) {
     throw new Error('process.binding is not supported');
@@ -2121,7 +2126,7 @@ process.umask = function() { return 0; };
 },{}],19:[function(require,module,exports){
 module.exports={
   "name": "moar-profile-viewer",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "converts cpuprofile files to call graphs",
   "license": "MIT",
   "author": "Patrick Mueller <pmuellr@apache.org> (https://github.com/pmuellr)",
