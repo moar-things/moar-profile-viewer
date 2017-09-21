@@ -204,8 +204,8 @@ table.full-width {
 td {
   padding: 0.1em 0.5em;
 }
-tr:nth-child(even) {
-  background-color: #EEE;
+table.bands tr:nth-child(even) {
+  background-color: #F1F1F1;
 }
 thead td {
   font-weight: bold;
@@ -236,21 +236,117 @@ tr.header td {
 }
 .source-linehit,
 .source-function {
-  border-radius: 0.5em;
   margin: 0.5em 0;
   padding: 0.2em 0.5em;
 }
 .source-linehit {
-  border: thin solid #D77;
+  border-left: 2px solid #D77;
+  border-bottom: 2px solid #D77;
+  border-right: 2px solid #D77;
+  border-bottom-left-radius: 0.5em;
+  border-bottom-right-radius: 0.5em;
   color: #D77;
+  background-color: #FEE;
 }
 .source-function {
-  border: thin solid #77D;
+  border-left: 2px solid #77D;
+  border-bottom: 2px solid #77D;
+  border-right: 2px solid #77D;
+  border-bottom-left-radius: 0.5em;
+  border-bottom-right-radius: 0.5em;
   color: #77D;
+  background-color: #EEF;
 }
 .source-line-linehit {
   background-color: #FFE7E7;
 }
 .source-line-function {
   background-color: #E7E7FF;
+}
+/* based on default style from highlight.js */
+.hljs-file {
+  font-family: monospace;
+  white-space: pre;
+}
+.hljs-ext-indent {
+  letter-spacing: 0.5em;
+}
+.hljs-ext-lineno {
+  padding-right: 1em;
+  text-align: right;
+  color: #00F;
+}
+.hljs-ext-line {
+  /* word-break: break-all; */
+}
+.hljs-subst {
+  color: #444;
+}
+.hljs-comment {
+  color: #D81;
+  font-style: italic;
+}
+.hljs-keyword {
+  font-size: 80%;
+}
+.hljs-function .hljs-title {
+  font-size: 150%;
+}
+.hljs-class .hljs-title {
+  font-size: 150%;
+}
+.hljs-keyword,
+.hljs-attribute,
+.hljs-selector-tag,
+.hljs-meta-keyword,
+.hljs-doctag,
+.hljs-name {
+  font-weight: bold;
+  font-style: italic;
+}
+.hljs-type,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-quote,
+.hljs-template-tag,
+.hljs-deletion {
+  color: #880000;
+}
+.hljs-title,
+.hljs-section {
+  color: #880000;
+  font-weight: bold;
+}
+.hljs-symbol,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-link,
+.hljs-selector-attr,
+.hljs-selector-pseudo {
+  color: #BC6060;
+}
+.hljs-regexp,
+.hljs-string,
+.hljs-number,
+.hljs-literal {
+  font-weight: bold;
+  color: #77F;
+}
+.hljs-built_in,
+.hljs-bullet,
+.hljs-code,
+.hljs-addition {
+  color: #397300;
+}
+.hljs-meta {
+  color: #1f7199;
+}
+.hljs-meta-string {
+  color: #4d99bf;
+}
+.hljs-emphasis {
+  font-style: italic;
+}
+.hljs-strong {
+  font-weight: bold;
 }

@@ -26,6 +26,7 @@ function test12 (t) {
 }
 
 function test (t, file) {
+  quietTest(t)
   let profile = JSON.parse(fs.readFileSync(file, 'utf8'))
 
   profile = Profile.create(profile)
@@ -114,5 +115,34 @@ function test (t, file) {
     }
   }
 
+  t.pass(`passed ${t.quietPassed} asserts`)
   t.end()
+}
+
+// change t.equal(), t.ok() to only fail, not pass
+function quietTest (t) {
+  const originalOk = t.ok
+  const originalEqual = t.equal
+
+  t.ok = quietOk
+  t.equal = quietEqual
+  t.quietPassed = 0
+
+  function quietOk (value, message) {
+    if (value) {
+      t.quietPassed++
+      return
+    }
+
+    originalOk.call(t, value, message)
+  }
+
+  function quietEqual (actual, expected, message) {
+    if (actual === expected) {
+      t.quietPassed++
+      return
+    }
+
+    originalEqual.call(t, actual, expected, message)
+  }
 }

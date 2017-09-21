@@ -1,6 +1,6 @@
 {
   "name": "moar-profile-viewer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "converts cpuprofile files to call graphs",
   "license": "MIT",
   "author": "Patrick Mueller <pmuellr@apache.org> (https://github.com/pmuellr)",
@@ -28,12 +28,13 @@
     ]
   },
   "dependencies": {
-    "jquery": "~3.2.1"
   },
   "devDependencies": {
     "browserify": "~14.4.0",
     "cat-source-map": "~0.1.2",
     "chalk": "~2.1.0",
+    "highlight.js": "~9.12.0",
+    "jquery": "~3.2.1",
     "less": "~2.7.2",
     "nodemon": "~1.11.1",
     "shelljs": "~0.7.8",
