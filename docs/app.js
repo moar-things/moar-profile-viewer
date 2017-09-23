@@ -1416,7 +1416,7 @@ function scrollIntoViewFunctionRecord (scrollRecord) {
   if (CurrentSelectedFn == null) return
 
   if (scrollRecord) utils.scrollIntoView(jQuery(`#fn-record-${CurrentSelectedFn.id}`)[0])
-  utils.scrollIntoView(jQuery(`#source-fn-${CurrentSelectedFn.id}`)[0])
+  utils.scrollIntoView(jQuery(`.hljs-ext-lineno-${CurrentSelectedFn.line}`)[0])
 }
 
 function highlightSelectedFunctionRecord () {
@@ -19194,7 +19194,7 @@ process.umask = function() { return 0; };
 },{}],203:[function(require,module,exports){
 module.exports={
   "name": "moar-profile-viewer",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "converts cpuprofile files to call graphs",
   "license": "MIT",
   "author": "Patrick Mueller <pmuellr@apache.org> (https://github.com/pmuellr)",
