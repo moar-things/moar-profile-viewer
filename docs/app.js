@@ -19194,7 +19194,7 @@ process.umask = function() { return 0; };
 },{}],203:[function(require,module,exports){
 module.exports={
   "name": "moar-profile-viewer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "converts cpuprofile files to call graphs",
   "license": "MIT",
   "author": "Patrick Mueller <pmuellr@apache.org> (https://github.com/pmuellr)",
