@@ -31,26 +31,25 @@
       </div>
 
       <div id="toolbar-t">
-        <span class="float-left">
+        <div>
           <div class="zoom-button"></div>
+          &nbsp;
+          <input id="file-input" type="file" name="file-input" accept=".cpuprofile">
           sort by time:
-          <button id="button-sort-total">total</button>
-          <button id="button-sort-self">self</button>
-          &nbsp;&nbsp;&nbsp;
+          <input type="radio" name="sort-button" id="button-sort-total" checked> total
+          <input type="radio" name="sort-button" id="button-sort-self"> self
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           show:
-          <button id="button-show-all">all</button>
-          <button id="button-show-user">user</button>
-          <!-- soon come!
-          &nbsp;&nbsp;&nbsp;
-          scope:
-          <button id="button-scope-fn">function</button>
-          <button id="button-scope-script">script</button>
-          <button id="button-scope-package">package</button>
-          -->
-        </span>
-        <span class="float-right">
-          .cpuprofile file: <input id="file-input" type="file" name="file-input" accept=".cpuprofile">
-        </span>
+          <input type="radio" name="show-button" id="button-show-all"> all
+          <input type="radio" name="show-button" id="button-show-user" checked> user
+        </div>
+        <!-- soon come!
+        &nbsp;&nbsp;&nbsp;
+        scope:
+        <button id="button-scope-fn">function</button>
+        <button id="button-scope-script">script</button>
+        <button id="button-scope-package">package</button>
+        -->
         <div id="profile-meta"></div>
       </div>
 

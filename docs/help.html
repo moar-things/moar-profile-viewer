@@ -122,6 +122,11 @@
       When you click on a function in any of the three panes, the
       top pane will scroll to that function, and highlight it in
       purple to indicate that it's the currently selected function.
+      Other functions in the top pane will be colored green or yellow
+      if the selected function is called by the function (green) or
+      calls the function (yellow).
+    </p>
+    <p>
       The bottom panes will be updated to show relevant information
       for the selected function.  Functions which are called by, or
       that call the selected function, will be shown in the top pane
@@ -179,6 +184,49 @@
       clicked to change the page to show information about that
       function.  Examples are shown at <span class="red-box">G</span>.
     </p>
+
+    <h2>frequently asked questions</h2>
+
+    <ul>
+      <li><b>What are the red bubbles in the source code?</b>
+      <p>
+        The V8 CPU Profiler occaisonally provides information about
+        particular lines within a function; those lines are annotated
+        with a red bubble.  Note that the V8 CPU Profiler typically doesn't
+        provide many of these.
+      </p>
+      </li>
+
+      <li><b>The yellow and green lines in function list in the top pane don't seem right.</b>
+      <p>
+        Keep in mind that a function can both call a function and be called by
+        the same function.  Those functions are marked green (calls selected
+        function).
+      </p>
+      </li>
+
+      <li><b>There seem to be functions missing in the function list.</b>
+      <p>V8 does a great job inlining functions, as an optimization.
+        That is, it moves the body of a function into the caller of the
+        function.  When this happens, the function that gets reported will
+        be the caller, not the actual function.  Consider using the option
+        <tt>--no-use_inlining</tt> when running your node application to turn
+        off inlining, to get the correct accounting.
+      </p>
+      </li>
+
+      <li><b>Something still seems wrong.</b>
+      <p>
+        You may have found a bug!  Feel free to
+        <a href="https://github.com/moar-things/moar-profile-viewer/issues">
+          open an issue
+        </a>.
+        Expect that you may need to provide your `.cpuprofile` file, to
+        reproduce the issue.
+      </p>
+      </li>
+
+    </ul>
 
     <h2>need moar help?</h2>
 

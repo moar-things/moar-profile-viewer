@@ -1347,11 +1347,12 @@ exports.scopeScript = scopeScript
 exports.scopePackage = scopePackage
 exports.fnSelected = fnSelected
 
-const jQuery = window.jQuery
-
 const utils = require('./utils')
 const fnInformer = require('./fn-informer')
 const sourceFormatter = require('./source-formatter')
+
+const E = utils.escapeHtml
+const jQuery = window.jQuery
 
 let CurrentRecords = null
 let CurrentSort = 'total'
@@ -1383,7 +1384,7 @@ function load (profile, profileName) {
   jQuery('#source-url').text('source')
   jQuery('#fn-info').text('info')
 
-  jQuery('#profile-name').text(utils.escapeHtml(profileName))
+  jQuery('#profile-name').text(E(profileName))
   window.document.title = `${profileName} - moar profile viewer`
 }
 
@@ -1459,7 +1460,8 @@ function highlightSelectedFunctionRecord () {
   }
 
   // also highlight differently other fn's in the stacks of the fn
-  jQuery('table.records-table tr.related').removeClass('related')
+  jQuery('table.records-table tr.related').removeClass('related-parent')
+  jQuery('table.records-table tr.related').removeClass('related-child')
 
   let checkedFns
 
@@ -1474,7 +1476,7 @@ function highlightSelectedFunctionRecord () {
     checkedFns.add(fn)
 
     for (let fnRelated of fn.children) {
-      jQuery(`#fn-record-${fnRelated.id}`).addClass('related')
+      jQuery(`#fn-record-${fnRelated.id}`).addClass('related-child')
       highlightRelatedChildren(fnRelated)
     }
   }
@@ -1484,7 +1486,7 @@ function highlightSelectedFunctionRecord () {
     checkedFns.add(fn)
 
     for (let fnRelated of fn.parents) {
-      jQuery(`#fn-record-${fnRelated.id}`).addClass('related')
+      jQuery(`#fn-record-${fnRelated.id}`).addClass(`related-parent`)
       highlightRelatedParents(fnRelated)
     }
   }
@@ -1502,8 +1504,8 @@ function fnSelected (fnID, scroll) {
 
   const fn = profile.fns.filter(fn => fn.id === fnID)[0]
   if (fn == null) {
-    jelContentL.text(`internal error: can't locate function with id ${utils.escapeHtml(fnID)}`)
-    jelContentR.text(`internal error: can't locate function with id ${utils.escapeHtml(fnID)}`)
+    jelContentL.text(`internal error: can't locate function with id ${E(fnID)}`)
+    jelContentR.text(`internal error: can't locate function with id ${E(fnID)}`)
     jelSourceUrl.text('source')
     return
   }
@@ -1532,7 +1534,7 @@ function fnSelected (fnID, scroll) {
   }
 
   jelFnInfo.text(`${fn.name}()`)
-  jelSourceUrl.text(utils.escapeHtml(sourceName))
+  jelSourceUrl.text(E(sourceName))
 
   showAllUserCurrent()
   setTimeout(
@@ -1548,12 +1550,11 @@ function updateMeta (meta) {
 
   const html = []
 
-  const metaDate = utils.escapeHtml(meta.date.replace('T', ' '))
-  const metaMain = utils.escapeHtml(meta.mainModule)
-  const metaNode = utils.escapeHtml(meta.nodeVersion)
-  const metaPlat = utils.escapeHtml(`${meta.platform}/${meta.arch}`)
+  const metaDate = E(localeDate(meta.date))
+  const metaMain = E(meta.mainModule)
+  const metaNode = E(meta.nodeVersion)
+  const metaPlat = E(`${meta.platform}/${meta.arch}`)
 
-  html.push('<br>&nbsp;<br>')
   html.push('<span>')
   html.push(`<span class="bordered">${metaDate}</span>`)
   html.push(`<span class="bordered">${metaMain}</span>`)
@@ -1582,7 +1583,7 @@ function displayRecords () {
 
   html.push('<tbody>')
   for (let record of CurrentRecords) {
-    const onClick = `MoarProfileViewer.fnSelected('${utils.escapeHtml(record.id)}', false)`
+    const onClick = `MoarProfileViewer.fnSelected('${E(record.id)}', false)`
     const userSys = record.isSystem ? 'isSystem' : 'isUser'
 
     html.push(`<tr id="fn-record-${record.id}"class="clickable ${userSys}" onclick="${onClick}">`)
@@ -1591,7 +1592,7 @@ function displayRecords () {
     html.push(`<td style="text-align:right;">${record.totalPercent}%</td>`)
     html.push(`<td style="text-align:right;">${record.selfTime}&nbsp;ms</td>`)
     html.push(`<td style="text-align:right;">${record.selfPercent}%</td>`)
-    html.push(`<td>${utils.escapeHtml(record.script)}</td>`)
+    html.push(`<td>${E(record.script)}</td>`)
     html.push(`<td>${record.pkg}</td>`)
     html.push('</tr>')
   }
@@ -1616,10 +1617,10 @@ function getFunctionRecords (profile) {
   let id = 0
   return profile.fns.map(fn => {
     let pkg = fn.script.pkg
-    let pkgName = utils.escapeHtml(pkg.name)
-    if (pkg.version) pkgName += ' @ ' + utils.escapeHtml(pkg.version)
+    let pkgName = E(pkg.name)
+    if (pkg.version) pkgName += ' @ ' + E(pkg.version)
     if (!pkg.isSystemOrUnknown) {
-      pkgName += ` &nbsp;&nbsp;<a href="https://npmjs.org/package/${utils.escapeHtml(pkg.name)}" target="npm-${utils.escapeHtml(pkg.name)}"><img src="images/open-iconic/external-link-8x.png" alt="npm" width="12px"></a>`
+      pkgName += ` &nbsp;&nbsp;<a href="https://npmjs.org/package/${E(pkg.name)}" target="npm-${E(pkg.name)}"><img src="images/open-iconic/external-link-8x.png" alt="npm" width="12px"></a>`
     }
 
     let name = fn.name
@@ -1627,7 +1628,7 @@ function getFunctionRecords (profile) {
       name = `${name.substr(0, 20)} ...`
     }
 
-    name = utils.escapeHtml(name)
+    name = E(name)
     if (fn.name.startsWith('(')) name = `<i>${name}</i>`
 
     const selfTime = getSelfTime(fn)
@@ -1670,6 +1671,11 @@ function getTotalTime (fn) {
       collect(child, nodes)
     }
   }
+}
+
+function localeDate (dateString) {
+  const date = new Date(Date.parse(dateString))
+  return `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`
 }
 
 function reduce (arr, init, fn) {
@@ -19261,7 +19267,7 @@ module.exports = function(hljs) {
 },{}],203:[function(require,module,exports){
 module.exports={
   "name": "moar-profile-viewer",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "converts cpuprofile files to call graphs",
   "license": "MIT",
   "author": "Patrick Mueller <pmuellr@apache.org> (https://github.com/pmuellr)",

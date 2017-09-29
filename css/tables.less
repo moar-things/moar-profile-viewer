@@ -14,11 +14,20 @@ thead td {
   font-weight: bold;
 }
 
-table tr.related {
+table tr.related-child,
+table tr.related-child.related-parent {
   background-color: #FFD;
 }
 
-table tr.selected {
+table tr.related-parent {
+  background-color: #DFD;
+}
+
+table tr.selected,
+table tr.selected.related-child,
+table tr.selected.related-parent,
+table tr.selected.related-parent.related-child
+ {
   background-color: #DDF;
 }
 
