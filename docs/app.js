@@ -1528,7 +1528,7 @@ function fnSelected (fnID, scroll) {
   if (CurrentSelectedScript !== fn.script) {
     CurrentSelectedScript = fn.script
     const totalTime = profile.totalTime
-    jelContentR.html(sourceFormatter.format(source, fn.script, totalTime))
+    jelContentR[0].innerHTML = sourceFormatter.format(source, fn.script, totalTime)
   }
 
   jelFnInfo.text(`${fn.name}()`)
@@ -19261,7 +19261,7 @@ module.exports = function(hljs) {
 },{}],203:[function(require,module,exports){
 module.exports={
   "name": "moar-profile-viewer",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "converts cpuprofile files to call graphs",
   "license": "MIT",
   "author": "Patrick Mueller <pmuellr@apache.org> (https://github.com/pmuellr)",
