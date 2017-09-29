@@ -1428,6 +1428,44 @@ function highlightSelectedFunctionRecord () {
 
   jQuery('table.records-table tr.selected').removeClass('selected')
   jQuery(`#fn-record-${CurrentSelectedFn.id}`).addClass('selected')
+
+  const profile = window.MoarProfileViewer.profile
+  const fn = profile.fns[CurrentSelectedFn.id]
+  if (fn == null) {
+    console.log(`can not find function with id: ${CurrentSelectedFn.id}`)
+    return
+  }
+
+  // also highlight differently other fn's in the stacks of the fn
+  jQuery('table.records-table tr.related').removeClass('related')
+
+  let checkedFns
+
+  checkedFns = new Set()
+  highlightRelatedChildren(fn)
+
+  checkedFns = new Set()
+  highlightRelatedParents(fn)
+
+  function highlightRelatedChildren (fn) {
+    if (checkedFns.has(fn)) return
+    checkedFns.add(fn)
+
+    for (let fnRelated of fn.children) {
+      jQuery(`#fn-record-${fnRelated.id}`).addClass('related')
+      highlightRelatedChildren(fnRelated)
+    }
+  }
+
+  function highlightRelatedParents (fn) {
+    if (checkedFns.has(fn)) return
+    checkedFns.add(fn)
+
+    for (let fnRelated of fn.parents) {
+      jQuery(`#fn-record-${fnRelated.id}`).addClass('related')
+      highlightRelatedParents(fnRelated)
+    }
+  }
 }
 
 function fnSelected (fnID, scroll) {
@@ -1505,7 +1543,7 @@ function displayRecords () {
   const jelContentT = jQuery('#content-t')
   const html = []
 
-  html.push('<table class="records-table show-user full-width bands">')
+  html.push('<table class="records-table show-user full-width">')
 
   html.push('<thead>')
   html.push('<tr>')
@@ -19198,7 +19236,7 @@ module.exports = function(hljs) {
 },{}],203:[function(require,module,exports){
 module.exports={
   "name": "moar-profile-viewer",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "converts cpuprofile files to call graphs",
   "license": "MIT",
   "author": "Patrick Mueller <pmuellr@apache.org> (https://github.com/pmuellr)",
