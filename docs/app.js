@@ -19290,6 +19290,7 @@ module.exports={
   },
   "dependencies": {},
   "devDependencies": {
+    "bootstrap": "~3.3.7",
     "browserify": "~14.4.0",
     "cat-source-map": "~0.1.2",
     "chalk": "~2.1.0",

@@ -2,6 +2,7 @@
   "ext": "js,json,less",
   "ignore": [
     "tmp/",
+    "docs/bootstrap/",
     "docs/app.js",
     "docs/app.js.map.json",
     "docs/viz-*.js",

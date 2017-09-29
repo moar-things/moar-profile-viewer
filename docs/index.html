@@ -7,6 +7,8 @@
     <link rel="shortcut icon" href="images/moar.png" />
     <link href="app.css" rel="stylesheet">
     <link href="lint.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
     <title>moar profile viewer</title>
   </head>
   <body>
@@ -34,12 +36,12 @@
         <span class="float-left">
           <div class="zoom-button"></div>
           sort by time:
-          <button id="button-sort-total">total</button>
-          <button id="button-sort-self">self</button>
+          <button id="button-sort-total" class="btn btn-default btn-sm">total</button>
+          <button id="button-sort-self" class="btn btn-default btn-sm">self</button>
           &nbsp;&nbsp;&nbsp;
           show:
-          <button id="button-show-all">all</button>
-          <button id="button-show-user">user</button>
+          <button id="button-show-all" class="btn btn-default btn-sm">all</button>
+          <button id="button-show-user" class="btn btn-default btn-sm">user</button>
           <!-- soon come!
           &nbsp;&nbsp;&nbsp;
           scope:
@@ -49,7 +51,7 @@
           -->
         </span>
         <span class="float-right">
-          .cpuprofile file: <input id="file-input" type="file" name="file-input" accept=".cpuprofile">
+          <input id="file-input" type="file" name="file-input" accept=".cpuprofile">
         </span>
         <div id="profile-meta"></div>
       </div>
@@ -79,6 +81,7 @@
     </div>
 
     <script src="jquery-3.2.1.js"></script>
+    <script src="bootstrap/js/bootstrap.js"></script>
     <script src="app.js"></script>
     <!-- Google Analytics -->
     <script>

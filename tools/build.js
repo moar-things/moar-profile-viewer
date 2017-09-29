@@ -3,6 +3,7 @@
 'use strict'
 
 const fs = require('fs')
+const path = require('path')
 
 const less = require('less')
 const shelljs = require('shelljs')
@@ -14,6 +15,9 @@ const buildModules = require('./build-modules')
 const logger = require('../lib/logger').getLogger(__filename)
 
 const cp = shelljs.cp
+const rm = shelljs.rm
+const mkdir = shelljs.mkdir
+
 const projectPath = utils.projectPath
 
 // main function
@@ -40,6 +44,24 @@ function * mainGen (cb) {
     projectPath('node_modules/jquery/dist/jquery.min.js'),
     projectPath(`docs/jquery-${jqueryVersion}.js`)
   )
+
+  const bsdDir = projectPath('docs/bootstrap')
+  const bsmDir = projectPath('node_modules/bootstrap/dist')
+
+  rm('-rf', bsdDir)
+  mkdir('-p', path.join(bsdDir, 'css'))
+  mkdir('-p', path.join(bsdDir, 'fonts'))
+  mkdir('-p', path.join(bsdDir, 'js'))
+
+  cp(path.join(bsmDir, 'css', 'bootstrap-theme.min.css'), path.join(bsdDir, 'css'))
+  cp(path.join(bsmDir, 'css', 'bootstrap.min.css'), path.join(bsdDir, 'css'))
+
+  cp(path.join(bsmDir, 'fonts', 'glyphicons-halflings-regular.eot'), path.join(bsdDir, 'fonts'))
+  cp(path.join(bsmDir, 'fonts', 'glyphicons-halflings-regular.ttf'), path.join(bsdDir, 'fonts'))
+  cp(path.join(bsmDir, 'fonts', 'glyphicons-halflings-regular.woff'), path.join(bsdDir, 'fonts'))
+  cp(path.join(bsmDir, 'fonts', 'glyphicons-halflings-regular.woff2'), path.join(bsdDir, 'fonts'))
+
+  cp(path.join(bsmDir, 'js', 'bootstrap.js'), path.join(bsdDir, 'js'))
 
   const timeElapsed = (Date.now() - timeStarted) / 1000
   logger.log(`successful build in ${timeElapsed.toLocaleString()} seconds`)
