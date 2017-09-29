@@ -1232,14 +1232,31 @@ function reportError (file, message) {
 },{"../profile":5,"./ui":20}],19:[function(require,module,exports){
 'use strict'
 
+exports.clear = clear
 exports.format = format
 
 const utils = require('./utils')
 const hljs = require('highlight.js')
 const hljsExt = require('./hljs-ext')
 
-// given JS source and a script object, return an HTML formatted version
+const CachedHtml = new Map()
+
+function clear () {
+  CachedHtml.clear()
+}
+
 function format (source, script, profileTime) {
+  let html = CachedHtml.get(script)
+  if (html != null) return html
+
+  html = _format(source, script, profileTime)
+  CachedHtml.set(script, html)
+
+  return html
+}
+
+// given JS source and a script object, return an HTML formatted version
+function _format (source, script, profileTime) {
   if (source === '') {
     return '<p>no source available</p>'
   }
@@ -1339,8 +1356,13 @@ const sourceFormatter = require('./source-formatter')
 let CurrentRecords = null
 let CurrentSort = 'total'
 let CurrentSelectedFn = null
+let CurrentSelectedScript = null
 
 function load (profile, profileName) {
+  sourceFormatter.clear()
+  CurrentSelectedFn = null
+  CurrentSelectedScript = null
+
   window.MoarProfileViewer.profile = profile
   console.log('loaded profile', profile)
 
@@ -1503,8 +1525,11 @@ function fnSelected (fnID, scroll) {
     sourceName = fn.script.url
   }
 
-  const totalTime = profile.totalTime
-  jelContentR.html(sourceFormatter.format(source, fn.script, totalTime))
+  if (CurrentSelectedScript !== fn.script) {
+    CurrentSelectedScript = fn.script
+    const totalTime = profile.totalTime
+    jelContentR.html(sourceFormatter.format(source, fn.script, totalTime))
+  }
 
   jelFnInfo.text(`${fn.name}()`)
   jelSourceUrl.text(utils.escapeHtml(sourceName))
@@ -19236,7 +19261,7 @@ module.exports = function(hljs) {
 },{}],203:[function(require,module,exports){
 module.exports={
   "name": "moar-profile-viewer",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "converts cpuprofile files to call graphs",
   "license": "MIT",
   "author": "Patrick Mueller <pmuellr@apache.org> (https://github.com/pmuellr)",
