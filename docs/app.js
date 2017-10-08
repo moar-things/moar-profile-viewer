@@ -1460,8 +1460,8 @@ function highlightSelectedFunctionRecord () {
   }
 
   // also highlight differently other fn's in the stacks of the fn
-  jQuery('table.records-table tr.related').removeClass('related-parent')
-  jQuery('table.records-table tr.related').removeClass('related-child')
+  jQuery('table.records-table .related-parent').removeClass('related-parent')
+  jQuery('table.records-table .related-child').removeClass('related-child')
 
   let checkedFns
 
@@ -19267,7 +19267,7 @@ module.exports = function(hljs) {
 },{}],203:[function(require,module,exports){
 module.exports={
   "name": "moar-profile-viewer",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "converts cpuprofile files to call graphs",
   "license": "MIT",
   "author": "Patrick Mueller <pmuellr@apache.org> (https://github.com/pmuellr)",
