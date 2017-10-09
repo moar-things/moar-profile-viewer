@@ -10,74 +10,8 @@
     <title>moar profile viewer</title>
   </head>
   <body>
-    <div id="main" class="zoom-out">
-
-      <div id="header">
-        <span>
-          <span class="float-left">
-            moar profile viewer
-            <i><span id='version'>v0.0.0</span></i>
-            &nbsp;&nbsp;
-            <span id='profile-name'></span>
-          </span>
-          <span class="float-right">
-            <a href="https://github.com/moar-things/moar-profile-viewer" target="github">github</a>
-            |
-            <a href="#" onclick="MoarProfileViewer.displayPrivacy()">privacy</a>
-            |
-            <a href="help.html" target="help">help</a>
-          </span>
-        </span>
-      </div>
-
-      <div id="toolbar-t">
-        <div>
-          <div class="zoom-button"></div>
-          &nbsp;
-          <input id="file-input" type="file" name="file-input" accept=".cpuprofile">
-          sort by time:
-          <input type="radio" name="sort-button" id="button-sort-total" checked> total
-          <input type="radio" name="sort-button" id="button-sort-self"> self
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          show:
-          <input type="radio" name="show-button" id="button-show-all"> all
-          <input type="radio" name="show-button" id="button-show-user" checked> user
-        </div>
-        <!-- soon come!
-        &nbsp;&nbsp;&nbsp;
-        scope:
-        <button id="button-scope-fn">function</button>
-        <button id="button-scope-script">script</button>
-        <button id="button-scope-package">package</button>
-        -->
-        <div id="profile-meta"></div>
-      </div>
-
-      <div id="content-t">
-        <div id="initial-content-t">
-          drop a .cpuprofile file here or select one with the button above
-        </div>
-      </div>
-
-      <div id="toolbar-l">
-        <div class="zoom-button"></div>
-        <span id="fn-info">info</span>
-      </div>
-
-      <div id="content-l">
-      </div>
-
-      <div id="toolbar-r">
-        <div class="zoom-button"></div>
-        <span id="source-url">source</span>
-      </div>
-
-      <div id="content-r">
-      </div>
-
-    </div>
-
-    <script src="jquery-3.2.1.js"></script>
+    <div id='body'></div>
+    <script src="jquery.js"></script>
     <script src="app.js"></script>
     <!-- Google Analytics -->
     <script>

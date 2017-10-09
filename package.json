@@ -1,6 +1,6 @@
 {
   "name": "moar-profile-viewer",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "converts cpuprofile files to call graphs",
   "license": "MIT",
   "author": "Patrick Mueller <pmuellr@apache.org> (https://github.com/pmuellr)",
@@ -13,13 +13,9 @@
     "url": "https://github.com/moar-things/moar-profile-viewer/issues"
   },
   "scripts": {
-    "build": "node tools/build",
-    "sample": "cd test/fixtures && ../../moar-profile-viewer.js express-jade.cpuprofile",
-    "standard": "echo 'running standard' && standard -v",
-    "testU": "npm -s run utest",
-    "test": "npm -s run utest && npm -s run standard",
-    "utest": "node test/index.js | FORCE_COLOR=1 tap-spec",
-    "watch": "nodemon --exec 'node tools/watch-task'"
+    "build": "make build",
+    "test": "make test",
+    "watch": "nodemon --exec 'tools/top-level-make.sh watchTask'"
   },
   "standard": {
     "ignore": [
@@ -27,15 +23,28 @@
       "/docs/"
     ]
   },
+  "babel": {
+    "presets": [
+      "react"
+    ]
+  },
   "dependencies": {},
   "devDependencies": {
+    "babel-preset-es2015": "~6.24.1",
+    "babel-preset-react": "~6.24.1",
+    "babelify": "~7.3.0",
     "browserify": "~14.4.0",
-    "cat-source-map": "~0.1.2",
     "chalk": "~2.1.0",
+    "eslint": "~4.8.0",
+    "eslint-plugin-import": "~2.7.0",
+    "exorcist": "~1.0.0",
     "highlight.js": "~9.12.0",
     "jquery": "~3.2.1",
     "less": "~2.7.2",
     "nodemon": "~1.12.1",
+    "prop-types": "~15.6.0",
+    "react": "~16.0.0",
+    "react-dom": "~16.0.0",
     "shelljs": "~0.7.8",
     "st": "~1.2.0",
     "standard": "~10.0.3",

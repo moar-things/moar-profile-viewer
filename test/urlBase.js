@@ -6,9 +6,7 @@ const utils = require('./lib/utils')
 
 const runTest = utils.createTestRunner(__filename)
 
-runTest(test)
-
-function test (t) {
+runTest(function test (t) {
   let paths
 
   paths = []
@@ -36,4 +34,4 @@ function test (t) {
   t.equal(urlBase(paths), '/a/b/c', 'three segment common path')
 
   t.end()
-}
+})

@@ -54,26 +54,31 @@ meta[name="viewport"][content*="minimum-scale"] {
 
 
 /* Unlabelled Form Elements */
-
+/* Don't generally need this with react
 input:not([id]),
 select:not([id]),
 textarea:not([id]) {
   border: 5px solid red;
 }
+*/
 
 label:not([for]) {
   border: 5px solid red;
 }
+
+/* Don't generally need this with react
 input:not([name]),
 select:not([name]),
 textarea:not([name]) {
   border: 5px solid red;
 }
+*/
 
+/* Don't generally need this with react
 form:not([name]):not([id]) {
   border: 5px solid red;
 }
-
+*/
 
 /* Empty Interactive Elements */
 

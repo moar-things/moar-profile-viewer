@@ -9,9 +9,7 @@ const path = require('path')
 const hljs = require('highlight.js')
 const hljsExt = require('../lib/web/hljs-ext')
 
-runTest(testHljsExt)
-
-function testHljsExt (t) {
+runTest(function testHljsExt (t) {
   const sourceFile = path.join(__dirname, 'fixtures', 'to-highlight.js')
   const outFile = path.join(__dirname, '..', 'tmp', 'to-hightlight.html')
 
@@ -25,4 +23,4 @@ function testHljsExt (t) {
   fs.writeFileSync(outFile, html)
   console.log(`generated ${path.relative(process.cwd(), outFile)}`)
   t.end()
-}
+})

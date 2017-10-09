@@ -6,10 +6,8 @@ const runTest = utils.createTestRunner(__filename)
 
 const pkg = require('../package.json')
 
-runTest(testPackageName)
-
 // Check the package name.
-function testPackageName (t) {
+runTest(function testPackageName (t) {
   t.deepEqual(pkg.name, 'moar-profile-viewer', 'checking package name')
   t.end()
-}
+})

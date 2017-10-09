@@ -9,21 +9,17 @@ const utils = require('./lib/utils')
 
 const runTest = utils.createTestRunner(__filename)
 
-runTest(testMoar)
-runTest(testV8)
-runTest(test12)
-
-function testMoar (t) {
+runTest(function testMoar (t) {
   test(t, path.join(__dirname, 'fixtures', 'a-b.moar.cpuprofile'))
-}
+})
 
-function testV8 (t) {
+runTest(function testV8 (t) {
   test(t, path.join(__dirname, 'fixtures', 'a-b.v8.cpuprofile'))
-}
+})
 
-function test12 (t) {
+runTest(function test12 (t) {
   test(t, path.join(__dirname, 'fixtures', 'a-b.12.cpuprofile'))
-}
+})
 
 function test (t, file) {
   quietTest(t)
