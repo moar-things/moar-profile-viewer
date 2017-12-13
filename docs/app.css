@@ -283,7 +283,6 @@ tr.header td {
 .source-line-function {
   background-color: #E7E7FF;
 }
-/* based on default style from highlight.js */
 .hljs-file {
   font-family: monospace;
   white-space: pre;
@@ -299,74 +298,156 @@ tr.header td {
 .hljs-ext-line {
   /* word-break: break-all; */
 }
-.hljs-subst {
-  color: #444;
-}
-.hljs-comment {
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
   color: #D81;
   font-style: italic;
 }
-.hljs-keyword {
+.token.punctuation {
+  color: #999;
+}
+.namespace {
+  opacity: .7;
+}
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: #905;
+}
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  color: #690;
+}
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  color: #a67f59;
+  background: rgba(255, 255, 255, 0.5);
+}
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+  color: #07a;
+  font-size: 80%;
+  font-style: italic;
+}
+.token.function,
+.token.class-name {
+  color: #DD4A68;
+  font-size: 120%;
+  font-weight: bold;
+}
+.token.regex,
+.token.important,
+.token.variable {
+  color: #e90;
+}
+.token.important,
+.token.bold {
+  font-weight: bold;
+}
+.token.italic {
+  font-style: italic;
+}
+.token.entity {
+  cursor: help;
+}
+/*
+.token.subst {
+  color: #444;
+}
+
+.token.comment {
+  color: #D81;
+  font-style: italic;
+}
+
+.token.keyword {
   font-size: 80%;
 }
-.hljs-function .hljs-title {
+
+.token.function .token.title {
   font-size: 150%;
 }
-.hljs-class .hljs-title {
+
+.token.class .token.title {
   font-size: 150%;
 }
-.hljs-keyword,
-.hljs-attribute,
-.hljs-selector-tag,
-.hljs-meta-keyword,
-.hljs-doctag,
-.hljs-name {
+
+.token.keyword,
+.token.attribute,
+.token.selector-tag,
+.token.meta-keyword,
+.token.doctag,
+.token.name {
   font-weight: bold;
   font-style: italic;
 }
-.hljs-type,
-.hljs-selector-id,
-.hljs-selector-class,
-.hljs-quote,
-.hljs-template-tag,
-.hljs-deletion {
+
+.token.type,
+.token.selector-id,
+.token.selector-class,
+.token.quote,
+.token.template-tag,
+.token.deletion {
   color: #880000;
 }
-.hljs-title,
-.hljs-section {
+
+.token.title,
+.token.section {
   color: #880000;
   font-weight: bold;
 }
-.hljs-symbol,
-.hljs-variable,
-.hljs-template-variable,
-.hljs-link,
-.hljs-selector-attr,
-.hljs-selector-pseudo {
+
+.token.symbol,
+.token.variable,
+.token.template-variable,
+.token.link,
+.token.selector-attr,
+.token.selector-pseudo {
   color: #BC6060;
 }
-.hljs-regexp,
-.hljs-string,
-.hljs-number,
-.hljs-literal {
+
+.token.regexp,
+.token.string,
+.token.number,
+.token.literal {
   font-weight: bold;
   color: #77F;
 }
-.hljs-built_in,
-.hljs-bullet,
-.hljs-code,
-.hljs-addition {
+
+.token.built_in,
+.token.bullet,
+.token.code,
+.token.addition {
   color: #397300;
 }
-.hljs-meta {
+
+.token.meta {
   color: #1f7199;
 }
-.hljs-meta-string {
+
+.token.meta-string {
   color: #4d99bf;
 }
-.hljs-emphasis {
+
+.token.emphasis {
   font-style: italic;
 }
-.hljs-strong {
+
+.token.strong {
   font-weight: bold;
 }
+*/
