@@ -1789,7 +1789,7 @@ let CurrentSelectedScript = null;
 
 events.on('profile-loaded', load);
 
-function load(profile, profileName) {
+function load(profile) {
   State.set({
     profile: profile,
     selected: null
@@ -1817,8 +1817,8 @@ function load(profile, profileName) {
   jQuery('#source-url').text('source');
   jQuery('#fn-info').text('info');
 
-  jQuery('#profile-name').text(E(profileName));
-  window.document.title = `${profileName} - moar profile viewer`;
+  jQuery('#profile-name').text(E(profile.fileName));
+  window.document.title = `${profile.fileName} - moar profile viewer`;
 }
 
 function sortByTotalTime() {
@@ -24480,7 +24480,7 @@ arguments[4][56][0].apply(exports,arguments)
 },{"dup":56}],65:[function(require,module,exports){
 module.exports={
   "name": "moar-profile-viewer",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "converts cpuprofile files to call graphs",
   "license": "MIT",
   "author": "Patrick Mueller <pmuellr@apache.org> (https://github.com/pmuellr)",
@@ -24508,9 +24508,7 @@ module.exports={
       "react"
     ]
   },
-  "dependencies": {
-    "prismjs": "~1.9.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "babel-preset-es2015": "~6.24.1",
     "babel-preset-react": "~6.24.1",
@@ -24524,6 +24522,7 @@ module.exports={
     "jquery": "~3.2.1",
     "less": "~2.7.2",
     "nodemon": "~1.12.1",
+    "prismjs": "~1.9.0",
     "prop-types": "~15.6.0",
     "react": "~16.0.0",
     "react-dom": "~16.0.0",
