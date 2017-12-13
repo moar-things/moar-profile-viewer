@@ -1069,7 +1069,7 @@ module.exports = class ToolbarFunctions extends ZoomableComponent {
       React.createElement(
         'div',
         null,
-        React.createElement('div', { className: 'zoom-button', onClick: this.handleZoom }),
+        React.createElement('div', { className: 'zoom-button', onClick: this.handleZoom, title: 'zoom' }),
         '\xA0',
         React.createElement('input', { type: 'file', accept: '.cpuprofile', onChange: this.handleLoadFile }),
         'sort by time:',
@@ -1114,7 +1114,7 @@ module.exports = class ToolbarInfo extends ZoomableComponent {
     return React.createElement(
       'div',
       { id: 'toolbar-l' },
-      React.createElement('div', { className: 'zoom-button', onClick: this.handleZoom }),
+      React.createElement('div', { className: 'zoom-button', onClick: this.handleZoom, title: 'zoom' }),
       React.createElement(
         'span',
         { id: 'fn-info' },
@@ -1155,7 +1155,7 @@ module.exports = class ToolbarSource extends ZoomableComponent {
     return React.createElement(
       'div',
       { id: 'toolbar-r' },
-      React.createElement('div', { className: 'zoom-button', onClick: this.handleZoom }),
+      React.createElement('div', { className: 'zoom-button', onClick: this.handleZoom, title: 'zoom' }),
       React.createElement(
         'span',
         null,
@@ -24480,7 +24480,7 @@ arguments[4][56][0].apply(exports,arguments)
 },{"dup":56}],65:[function(require,module,exports){
 module.exports={
   "name": "moar-profile-viewer",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "converts cpuprofile files to call graphs",
   "license": "MIT",
   "author": "Patrick Mueller <pmuellr@apache.org> (https://github.com/pmuellr)",
